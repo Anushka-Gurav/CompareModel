@@ -156,6 +156,19 @@ export default function DatasetUpload() {
 
           <TabsContent value="kaggle" className="mt-8">
             <div className="glass rounded-lg p-8 space-y-6">
+              <div className="bg-primary/10 border border-primary/20 rounded-lg p-4">
+                <h3 className="font-heading font-bold mb-2 flex items-center gap-2">
+                  <Database className="h-5 w-5 text-primary" />
+                  How to get Kaggle API credentials
+                </h3>
+                <ol className="text-sm text-textMuted space-y-1 ml-6 list-decimal">
+                  <li>Go to <a href="https://www.kaggle.com/account" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Kaggle Account Settings</a></li>
+                  <li>Scroll to "API" section and click "Create New Token"</li>
+                  <li>Download kaggle.json file and copy username & key from it</li>
+                  <li>For dataset name, use format: <code className="bg-surface px-1 rounded">owner/dataset-name</code></li>
+                </ol>
+              </div>
+              
               <div>
                 <Label htmlFor="kaggle-dataset" className="text-lg font-heading mb-2 block">
                   Kaggle Dataset Name
@@ -163,7 +176,7 @@ export default function DatasetUpload() {
                 <Input
                   id="kaggle-dataset"
                   data-testid="kaggle-dataset-input"
-                  placeholder="e.g., username/dataset-name"
+                  placeholder="e.g., uciml/iris or user/dataset-name"
                   value={kaggleDataset}
                   onChange={(e) => setKaggleDataset(e.target.value)}
                   className="bg-surface border-border"
