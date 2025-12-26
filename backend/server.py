@@ -247,25 +247,53 @@ async def upload_dataset(file: UploadFile = File(...)):
 
 @api_router.post("/dataset/kaggle")
 async def fetch_kaggle_dataset(dataset_name: str, kaggle_username: str, kaggle_key: str):
+    kaggle_config = None
     try:
         # Import kaggle only when needed
-        import kaggle
+        from kaggle.api.kaggle_api_extended import KaggleApi
         
-        # Set Kaggle credentials
-        os.environ['KAGGLE_USERNAME'] = kaggle_username
-        os.environ['KAGGLE_KEY'] = kaggle_key
+        # Create Kaggle config directory
+        kaggle_dir = Path.home() / '.kaggle'
+        kaggle_dir.mkdir(exist_ok=True)
+        
+        # Write kaggle.json credentials
+        kaggle_config = kaggle_dir / 'kaggle.json'
+        with open(kaggle_config, 'w') as f:
+            import json
+            json.dump({
+                'username': kaggle_username,
+                'key': kaggle_key
+            }, f)
+        
+        # Set proper permissions (required by Kaggle API)
+        kaggle_config.chmod(0o600)
+        
+        # Initialize Kaggle API
+        api = KaggleApi()
+        
+        # Try to authenticate - kaggle might call sys.exit on error
+        try:
+            api.authenticate()
+        except SystemExit:
+            # Clean up and raise proper error
+            if kaggle_config and kaggle_config.exists():
+                kaggle_config.unlink()
+            raise HTTPException(
+                status_code=401, 
+                detail="Invalid Kaggle credentials. Please verify your username and API key are correct."
+            )
         
         dataset_id = str(uuid.uuid4())
         download_path = UPLOADS_DIR / dataset_id
         download_path.mkdir(exist_ok=True)
         
         # Download dataset
-        kaggle.api.dataset_download_files(dataset_name, path=str(download_path), unzip=True)
+        api.dataset_download_files(dataset_name, path=str(download_path), unzip=True)
         
         # Find CSV files
         csv_files = list(download_path.glob('*.csv'))
         if not csv_files:
-            raise HTTPException(status_code=400, detail="No CSV files found in the dataset")
+            raise HTTPException(status_code=400, detail="No CSV files found in the dataset. Please ensure the dataset contains CSV files.")
         
         # Read first CSV
         df = pd.read_csv(csv_files[0])
@@ -288,6 +316,11 @@ async def fetch_kaggle_dataset(dataset_name: str, kaggle_username: str, kaggle_k
         await db.datasets.insert_one(dataset_doc)
         
         preview = df.head(5).to_dict('records')
+        
+        # Clean up kaggle config
+        if kaggle_config and kaggle_config.exists():
+            kaggle_config.unlink()
+        
         return {
             "dataset_id": dataset_id,
             "filename": dataset_name,
@@ -295,8 +328,22 @@ async def fetch_kaggle_dataset(dataset_name: str, kaggle_username: str, kaggle_k
             "columns": len(df.columns),
             "preview": preview
         }
+    except HTTPException:
+        raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Kaggle dataset fetch failed: {str(e)}")
+        # Clean up kaggle config on error
+        if kaggle_config and kaggle_config.exists():
+            kaggle_config.unlink()
+        
+        error_msg = str(e)
+        if '401' in error_msg or 'Unauthorized' in error_msg:
+            raise HTTPException(status_code=401, detail="Invalid Kaggle credentials. Please check your username and API key.")
+        elif '403' in error_msg or 'Forbidden' in error_msg:
+            raise HTTPException(status_code=403, detail="Access denied. Please ensure you have accepted the dataset's terms on Kaggle website.")
+        elif '404' in error_msg or 'not found' in error_msg.lower():
+            raise HTTPException(status_code=404, detail=f"Dataset '{dataset_name}' not found. Please check the dataset name format (e.g., 'username/dataset-name').")
+        else:
+            raise HTTPException(status_code=500, detail=f"Kaggle dataset fetch failed: {error_msg}")
 
 @api_router.get("/dataset/{dataset_id}/columns")
 async def get_dataset_columns(dataset_id: str):
