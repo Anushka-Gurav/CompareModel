@@ -1,0 +1,132 @@
+{
+  "identity": {
+    "name": "E1",
+    "mission": "Create a 'Control Room' interface for ML training that feels like a futuristic terminal.",
+    "principles": [
+      "Fusion over Imitation: Mix Terminal aesthetics with Modern SaaS.",
+      "Emotion First: The user should feel like a 'Hacker' or 'Commander'.",
+      "Content is King: Data and Progress bars are the heroes.",
+      "Zoom In: Focus on the metrics.",
+      "Negative Space: Don't clutter the dashboard."
+    ]
+  },
+  "typography": {
+    "headings": {
+      "fontFamily": "Space Grotesk, sans-serif",
+      "weights": ["700", "500"],
+      "usage": "All page titles, section headers, and metric values."
+    },
+    "body": {
+      "fontFamily": "Inter, sans-serif",
+      "weights": ["400", "500"],
+      "usage": "General UI text, descriptions, labels."
+    },
+    "code": {
+      "fontFamily": "JetBrains Mono, monospace",
+      "weights": ["400"],
+      "usage": "Code snippets, logs, terminal outputs, data values."
+    },
+    "installation": "yarn add @fontsource/space-grotesk @fontsource/inter @fontsource/jetbrains-mono"
+  },
+  "colors": {
+    "palette": {
+      "background": "#09090b",
+      "surface": "#18181b",
+      "surfaceHighlight": "#27272a",
+      "border": "#27272a",
+      "primary": "#4ade80",
+      "primaryForeground": "#022c22",
+      "secondary": "#a78bfa",
+      "secondaryForeground": "#2e1065",
+      "accent": "#facc15",
+      "textMain": "#f4f4f5",
+      "textMuted": "#a1a1aa",
+      "success": "#22c55e",
+      "error": "#ef4444",
+      "warning": "#f59e0b"
+    },
+    "theme_strategy": "Dark Mode Default. The interface should feel like a dark, high-contrast control panel. Use 'Zinc' scale for neutrals and 'Green/Violet' for accents.",
+    "gradients": {
+      "hero": "linear-gradient(to right, #4ade80, #a78bfa)",
+      "glass": "linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%)"
+    }
+  },
+  "visual_enhancers": {
+    "borders": "1px solid rgba(255,255,255,0.1)",
+    "radius": "0.5rem",
+    "shadows": {
+      "card": "0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3)",
+      "glow": "0 0 15px rgba(74, 222, 128, 0.3)"
+    },
+    "textures": "Use subtle noise or grid patterns in the background to enhance the 'technical' feel."
+  },
+  "layout": {
+    "grid_system": "Bento Grid. Use CSS Grid with 'grid-cols-12' for complex dashboards.",
+    "spacing": "Generous. Use 'gap-6' or 'gap-8' between major sections. 'p-6' or 'p-8' inside cards.",
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+  },
+  "components": {
+    "buttons": {
+      "style": "Sharp or slightly rounded (rounded-md). High contrast.",
+      "variants": {
+        "default": "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_10px_rgba(74,222,128,0.2)]",
+        "outline": "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+        "ghost": "hover:bg-accent hover:text-accent-foreground"
+      }
+    },
+    "cards": {
+      "style": "Flat dark surface with subtle border. No heavy shadows.",
+      "classes": "bg-card text-card-foreground border border-border/50 shadow-sm"
+    },
+    "inputs": {
+      "style": "Minimalist, dark background.",
+      "classes": "bg-background border-input focus:ring-2 focus:ring-primary/50"
+    }
+  },
+  "images": {
+    "hero_background": {
+      "url": "https://images.unsplash.com/photo-1746421094550-8ca6940c2f6e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHw0fHxhYnN0cmFjdCUyMG5ldXJhbCUyMG5ldHdvcmslMjBkYXRhJTIwZmxvdyUyMGRhcmslMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc2NjY3ODQ4OHww&ixlib=rb-4.1.0&q=85",
+      "description": "Abstract digital shapes, use for Hero Section background with overlay."
+    },
+    "card_background_1": {
+      "url": "https://images.unsplash.com/photo-1647356191320-d7a1f80ca777?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMG5ldXJhbCUyMG5ldHdvcmslMjBkYXRhJTIwZmxvdyUyMGRhcmslMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc2NjY3ODQ4OHww&ixlib=rb-4.1.0&q=85",
+      "description": "Purple/Blue abstract, use for 'Unsupervised Learning' card background."
+    },
+    "card_background_2": {
+      "url": "https://images.unsplash.com/photo-1546557016-950084dd8399?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHw0fHxmdXR1cmlzdGljJTIwaHVkJTIwaW50ZXJmYWNlJTIwZWxlbWVudHMlMjBkYXJrJTIwbW9kZXxlbnwwfHx8fDE3NjY2Nzg0OTB8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Tech lights, use for 'Supervised Learning' card background."
+    }
+  },
+  "instructions_to_main_agent": [
+    "1. INSTALL FONTS: Run 'yarn add @fontsource/space-grotesk @fontsource/inter @fontsource/jetbrains-mono' and import them in 'index.js' or 'App.js'.",
+    "2. CONFIGURE TAILWIND: Update 'tailwind.config.js' to extend the font family: 'sans': ['Inter', ...], 'heading': ['Space Grotesk', ...], 'mono': ['JetBrains Mono', ...].",
+    "3. DARK MODE: Ensure the 'dark' class is applied to the root HTML element or a wrapper div. The design relies on dark mode variables.",
+    "4. SHADCN: Customize the 'components/ui' files. Remove default 'radius' if it's too round. Set it to '0.5rem' or '0.3rem'.",
+    "5. LAYOUT: Use a Sidebar Layout for the main app. The 'Home' page can be a landing page, but 'Model Selection' onwards should have a persistent sidebar.",
+    "6. PROGRESS BAR: When training, use a large, animated progress bar. Maybe use a 'glitch' effect or a 'scanning' animation.",
+    "7. VISUALIZATIONS: Use 'recharts' for the graphs. Style them with the custom palette (Green, Violet, Yellow).",
+    "8. DATA CLEANING: Show a step-by-step checklist UI as the data is being cleaned.",
+    "9. KAGGLE: Use a distinct icon (maybe the Kaggle logo or a generic 'Cloud Download' icon) for the Kaggle integration."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. In frontend design, this creates what users call the 'AI slop' aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy",
+    "Use glass-morphism effects with backdrop filters (12-24px blur)",
+    "You MUST NOT apply universal transition. Eg: 'transition: all'. This results in breaking transforms. Always add transitions for specific interactive elements like button, input excluding transforms",
+    "You MUST NOT center align the app container, ie do not add '.App { text-align: center; }' in the css file. This disrupts the human natural reading flow of text",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯📚🎭🎬🎪🎉🎊🎁🎀🎂🍰🎈🎨🎰💰💵💳🏦💎🪙💸🤑📊📈📉💹🔢🏆🥇 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "Main agent relies on these image URLs. Missing categories (especially sponsor logos) = main agent will use placeholder text which is FORBIDDEN",
+    "Prioritize using pre-existing components from src/components/ui when applicable",
+    "Create new components that match the style and conventions of existing components when needed",
+    "Examine existing components to understand the project's component patterns before creating new ones",
+    "Components MUST use named exports (export const ComponentName = ...)",
+    "Pages MUST use default exports (export default function PageName() {...})",
+    "Use 'sonner' for toasts. Sonner component are located in '/app/src/components/ui/sonner.tsx'"
+  ]
+}
