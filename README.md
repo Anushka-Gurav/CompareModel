@@ -1,5 +1,6 @@
 # Smart ML Model Trainer - ML Training Platform
-MLTrainer
+ML Trainer
+project stack includes training of different ml model and generating the h5 file contains trained model configuration  
 A full-stack machine learning training and comparison platform with a futuristic terminal-inspired interface. Train, evaluate, and compare multiple ML models with an intuitive dashboard.
 
 <img width="1898" height="904" alt="image" src="https://github.com/user-attachments/assets/ce3fe705-36d0-429b-a554-5ecfa86d1e96" />
