@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { ArrowRight, Cpu, Database, LineChart } from 'lucide-react';
@@ -28,28 +27,41 @@ export default function Landing() {
             >
               <span className="text-gradient">ML Training Platform</span>
             </h1>
+
             <p className="text-lg sm:text-xl text-textMuted max-w-3xl mx-auto mb-8" data-testid="hero-subtitle">
               Train machine learning models effortlessly. Upload your data, select an algorithm,
               and get instant results with comprehensive visualizations.
             </p>
+
             <div className="flex gap-4 justify-center">
+
+              {/* 🔥 UPDATED BUTTON */}
               <Button
                 data-testid="get-started-btn"
                 onClick={() => navigate('/select-model')}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-heading shadow-glow hover:shadow-glow transition-all duration-300"
+                className="bg-gradient-to-r from-indigo-500 to-purple-600 
+                           hover:from-indigo-600 hover:to-purple-700 
+                           text-white px-8 py-6 text-lg font-heading 
+                           shadow-lg hover:shadow-xl 
+                           transition-all duration-300"
               >
                 Train Model
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
+
+              {/* Compare Button (kept consistent with theme) */}
               <Button
                 data-testid="compare-models-btn"
                 onClick={() => navigate('/compare-models')}
                 variant="outline"
-                className="border-primary text-primary hover:bg-primary/10 px-8 py-6 text-lg font-heading transition-all duration-300"
+                className="border-indigo-500 text-indigo-500 
+                           hover:bg-indigo-500/10 px-8 py-6 text-lg 
+                           font-heading transition-all duration-300"
               >
                 Compare Models
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
+
             </div>
           </div>
         </div>
@@ -58,12 +70,10 @@ export default function Landing() {
       {/* Features Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div 
-            className="glass rounded-lg p-8 hover:border-primary/50 transition-all duration-300 group"
-            data-testid="feature-card-models"
-          >
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:shadow-glow transition-all duration-300">
-              <Cpu className="h-6 w-6 text-primary" />
+
+          <div className="glass rounded-lg p-8 hover:border-indigo-500/50 transition-all duration-300 group">
+            <div className="h-12 w-12 rounded-lg bg-indigo-500/10 flex items-center justify-center mb-4 group-hover:shadow-lg transition-all duration-300">
+              <Cpu className="h-6 w-6 text-indigo-500" />
             </div>
             <h3 className="text-xl font-heading font-bold mb-2">Multiple Models</h3>
             <p className="text-textMuted">
@@ -71,12 +81,9 @@ export default function Landing() {
             </p>
           </div>
 
-          <div 
-            className="glass rounded-lg p-8 hover:border-secondary/50 transition-all duration-300 group"
-            data-testid="feature-card-data"
-          >
-            <div className="h-12 w-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-4 group-hover:shadow-glow-purple transition-all duration-300">
-              <Database className="h-6 w-6 text-secondary" />
+          <div className="glass rounded-lg p-8 hover:border-purple-500/50 transition-all duration-300 group">
+            <div className="h-12 w-12 rounded-lg bg-purple-500/10 flex items-center justify-center mb-4 group-hover:shadow-lg transition-all duration-300">
+              <Database className="h-6 w-6 text-purple-500" />
             </div>
             <h3 className="text-xl font-heading font-bold mb-2">Auto Data Cleaning</h3>
             <p className="text-textMuted">
@@ -84,26 +91,25 @@ export default function Landing() {
             </p>
           </div>
 
-          <div 
-            className="glass rounded-lg p-8 hover:border-accent/50 transition-all duration-300 group"
-            data-testid="feature-card-viz"
-          >
-            <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:shadow-[0_0_15px_rgba(250,204,21,0.3)] transition-all duration-300">
-              <LineChart className="h-6 w-6 text-accent" />
+          <div className="glass rounded-lg p-8 hover:border-yellow-400/50 transition-all duration-300 group">
+            <div className="h-12 w-12 rounded-lg bg-yellow-400/10 flex items-center justify-center mb-4 group-hover:shadow-lg transition-all duration-300">
+              <LineChart className="h-6 w-6 text-yellow-400" />
             </div>
             <h3 className="text-xl font-heading font-bold mb-2">Rich Visualizations</h3>
             <p className="text-textMuted">
               Get detailed metrics, confusion matrices, ROC curves, and more for comprehensive model evaluation.
             </p>
           </div>
+
         </div>
       </div>
 
       {/* How It Works */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="text-3xl sm:text-4xl font-heading font-bold text-center mb-12">
-          How It <span className="text-primary">Works</span>
+          How It <span className="text-indigo-500">Works</span>
         </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {[
             { step: '01', title: 'Select Model', desc: 'Choose supervised or unsupervised' },
@@ -111,15 +117,16 @@ export default function Landing() {
             { step: '03', title: 'Configure', desc: 'Set model parameters' },
             { step: '04', title: 'Get Results', desc: 'View metrics & download model' },
           ].map((item, idx) => (
-            <div key={idx} className="relative" data-testid={`how-it-works-step-${idx + 1}`}>
+            <div key={idx} className="relative">
               <div className="glass rounded-lg p-6">
-                <div className="text-5xl font-heading font-bold text-primary/20 mb-2">{item.step}</div>
+                <div className="text-5xl font-heading font-bold text-indigo-500/20 mb-2">{item.step}</div>
                 <h4 className="text-lg font-heading font-bold mb-1">{item.title}</h4>
                 <p className="text-sm text-textMuted">{item.desc}</p>
               </div>
+
               {idx < 3 && (
                 <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2">
-                  <ArrowRight className="h-6 w-6 text-primary/40" />
+                  <ArrowRight className="h-6 w-6 text-indigo-500/40" />
                 </div>
               )}
             </div>
